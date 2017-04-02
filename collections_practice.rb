@@ -42,34 +42,60 @@ def count_elements(array)
  .map{|k, v| k.merge(count: v.length)} # add the "count" element to the hash
 end #end method
 
-### close with this, need to review/learn about hashes:::::::
-# def count_elements(array)
-# array.each_with_key do |key, value|
-#   array[key].count
-# end #end do loop
-# end #end method
 
-
-##### gonna come back to this one...... not used to arrays within hashes....
 def merge_data(keys, data)
-  #no idea what i'm doing with this one...
-  #....... merge data into keys and return keys
-  new_thing = {} #new_thing will be a hash with an array inside, with two hashes inside it
+  v1 = data
+  v2 = keys
+  v1[0].values.map.with_index {|v, i| v2[i].merge(v)}
+end
 
-  keys.each do |key, value| #first key = {:first_name=>blake}, second key = {:first_name=>ashley}... no values
-    #binding.pry
-    new_thing << key
 
-    #data[key] = [value] # assigning keys in this loop, {:first_name=>blake}, as the values in my new_hash...
-    #new_hash[:my_key] = "my value"
-    #hash[:my_key] = {second_level_key: "second level value"}
-  end #end loop
+  #got this answer from here: http://stackoverflow.com/questions/37445550/how-to-combines-two-nested-data-structures-into-one
 
-  data.each do |key, value|
-    #binding.pry
-    #new_hash[:my_key] = "my value"
-    #hash[:my_key] = {second_level_key: "second level value"}
-  end #end loop
-  puts keys #to see what i'm getting
-  return keys
+ #  keys.each do |element|
+ #    new_hash[:key] = element
+ #    #binding.pry
+ #    #element1 == {:first_name=>"blake"}
+ #    #element2 == {:first_name=>"ashley"}
+ #  end
+ #
+ #  data.each do |element|
+ #    #binding.pry
+ #    #element1 == {"blake"=>
+ # #  {:awesomeness=>10,
+ # #   :height=>"74",
+ # #   :last_name=>"johnson"},
+ # # "ashley"=>
+ # #  {:awesomeness=>9,
+ # #   :height=>60,
+ # #   :last_name=>"dubs"}}
+ #  end
+
+ def find_cool(cool)
+   cool.find_all do |object| #cool is an array with two hashes
+     if object.values.include?("cool")
+        object
+     end #end if statement
+   end
+ end
+
+
+
+
+#got this from a fellow classmate's github:
+def organize_schools(schools)
+
+  new_hash = {}
+
+  schools.each do |school, location|
+    city = location[:location]
+    new_hash[city] = []
+  end
+
+  schools.each do |school, location|
+    city = location[:location]
+    new_hash[city] << school
+  end
+
+  new_hash
 end #end method
